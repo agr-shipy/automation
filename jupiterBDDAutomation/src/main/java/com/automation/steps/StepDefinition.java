@@ -13,6 +13,8 @@ import static com.automation.base.AssertionUtils.assertEquals;
 import static com.automation.base.AssertionUtils.assertNotPresent;
 import static com.automation.base.AssertionUtils.assertEqualsGetAttribute;
 
+
+
 public class StepDefinition {
 
 	ContactPage contactPage = new ContactPage();
@@ -50,6 +52,7 @@ public class StepDefinition {
 		sendKeysTo(contactPage.Email, "joseph.1234@gmail.com");
 		sendKeysTo(contactPage.Message, "I am ready to submit");
 		clickOnElement(contactPage.submitBtn);
+		
 	}
 
 	@Then("^Validate errors are gone$")
@@ -64,12 +67,23 @@ public class StepDefinition {
 		assertEquals(submissionPage.successAlert, "we appreciate your feedback.");
 	}
 
-	@Then("^I enter invalid data in all mandatory fields$")
-	public void i_enter_invalid_data_in_all_mandatory_fields() throws Throwable {
-		sendKeysTo(contactPage.ForeName, " ");
-		sendKeysTo(contactPage.Email, "joseph .com");
-		sendKeysTo(contactPage.Message, " ");
-		clickOnElement(contactPage.submitBtn);
+	
+	@And("^I enter Forename as \"([^\"]*)\"$")
+	public void i_enter_Forename(String  Forename) throws Throwable {
+		sendKeysTo(contactPage.ForeName, Forename);
+		
+	}
+	
+	@And("^I enter Email as \"([^\"]*)\"$")
+	public void i_enter_Email(String Email) throws Throwable {
+		sendKeysTo(contactPage.Email, Email);
+
+	}
+	
+	@And("^I enter Message as \"([^\"]*)\"$")
+	public void i_enter_Message(String Message) throws Throwable {
+		sendKeysTo(contactPage.Message, Message);
+		
 	}
 
 	@Then("^I get validation errors$")
